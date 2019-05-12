@@ -6,7 +6,7 @@ public class Addition_And_Subtraction
 {
     private static int  NumberArrayLength;
 
-    public static int[] toWholeNumber(String n)
+    static int[] toWholeNumber(String n)
     {
         int[] num = new int[NumberArrayLength];
         int i;
@@ -25,17 +25,17 @@ public class Addition_And_Subtraction
         return num;
     }
 
-    public static String WholeNumberAddition(String number1, String number2)
+    static String WholeNumberAddition(String number1, String number2)
     {
         if(number1.length() >= number2.length())
             NumberArrayLength = number1.length();
         else
             NumberArrayLength = number2.length();
 
-        int num1[] = toWholeNumber(number1);
-        int num2[] = toWholeNumber(number2);
-        int result[] = new int[NumberArrayLength+1];
-        int temp[] = new int[NumberArrayLength];
+        int[] num1 = toWholeNumber(number1);
+        int[] num2 = toWholeNumber(number2);
+        int[] result = new int[NumberArrayLength+1];
+        int[] temp = new int[NumberArrayLength];
         String finalresult="";
 
         for(int i=0; i<NumberArrayLength; i++)
@@ -81,9 +81,10 @@ public class Addition_And_Subtraction
         return finalresult;
     }
 
-    public static String WholeDecimalAddition(String number1, String number2)
+    static String WholeDecimalAddition(String number1, String number2)
     {
-        String array1[], array2[];
+        String[] array1;
+        String[] array2;
         String finalresult;
         array1 = number1.split("[.]");
         array2 = number2.split("[.]");
@@ -113,9 +114,10 @@ public class Addition_And_Subtraction
         return finalresult;
     }
 
-    public static String DecimalNumberAddition(String number1, String number2)
+    static String DecimalNumberAddition(String number1, String number2)
     {
-        String array1[], array2[];
+        String[] array1;
+        String[] array2;
         String finalresult;
         array1 = number1.split("[.]");
         array2 = number2.split("[.]");
@@ -167,7 +169,7 @@ public class Addition_And_Subtraction
         return finalresult;
     }
 
-    public static String WholeNumberSubtraction(String number1, String number2)
+    static String WholeNumberSubtraction(String number1, String number2)
     {
         int j;
         for(j=0; j<number1.length(); j++)
@@ -227,10 +229,10 @@ public class Addition_And_Subtraction
                 return "0";
         }
 
-        int num1[] = toWholeNumber(Big);
-        int num2[] = toWholeNumber(Small);
-        int result[] = new int[NumberArrayLength];
-        int temp[] = new int[NumberArrayLength];
+        int[] num1 = toWholeNumber(Big);
+        int[] num2 = toWholeNumber(Small);
+        int[] result = new int[NumberArrayLength];
+        int[] temp = new int[NumberArrayLength];
         String finalresult = "";
 
         for(int i=0; i<NumberArrayLength; i++)
@@ -545,68 +547,12 @@ public class Addition_And_Subtraction
         return finalresult;
     }
 
-    public static boolean isRight(String number1, String number2)
-    {
-        String array1[] = number1.split("[.]");
-        String array2[] = number2.split("[.]");
-
-        if(array1.length > 2 || array2.length > 2)
-            return false;
-
-        if(!(number1.charAt(0)=='-' || (number1.charAt(0)>='0' && number1.charAt(0)<='9')))
-            return false;
-        for(int i=1; i<number1.length(); i++)
-        {
-            if(!(number1.charAt(i)=='.' || (number1.charAt(i)>='0' && number1.charAt(i)<='9')))
-                return false;
-        }
-
-        if(!(number2.charAt(0)=='-' || (number2.charAt(0)>='0' && number2.charAt(0)<='9')))
-            return false;
-        for(int i=1; i<number2.length(); i++)
-        {
-            if(!(number2.charAt(i)=='.' || (number2.charAt(i)>='0' && number2.charAt(i)<='9')))
-                return false;
-        }
-
-        return true;
-    }
-
     public static void Display(String number1, char operator, String number2, String result)
     {
         if(operator == '+')
             System.out.println(number1 + " + " + number2 + " = " + result);
         else
             System.out.println(number1 + " - " + number2 + " = " + result);
-    }
-
-    public static int CalculateStatus(String number1, String number2)
-    {
-        String array1[] = number1.split("[.]");
-        String array2[] = number2.split("[.]");
-
-        if(array1.length == 1 && array2.length == 1)
-            return 1;
-        else if(array1.length == 1 && array2.length == 2)
-            return 2;
-        else if(array1.length == 2 && array2.length == 1)
-            return 2;
-        else if(array1.length == 2 && array2.length == 2)
-            return 3;
-        else
-            return 0;
-    }
-
-    public static int CheckSign(String number1, String number2)
-    {
-        if(number1.charAt(0) != '-' && number2.charAt(0) != '-')
-            return 1;
-        else if(number1.charAt(0) == '-' && number2.charAt(0) != '-')
-            return 2;
-        else if(number1.charAt(0) != '-' && number2.charAt(0) == '-')
-            return 3;
-        else
-            return 4;
     }
 
     public static void main(String args[])
@@ -624,11 +570,11 @@ public class Addition_And_Subtraction
 
         System.out.println();
 
-        if(isRight(number1, number2))
+        if(HelperMethods.isRight(number1, number2))
         {
             String result = "";
-            int Status = CalculateStatus(number1, number2);
-            int Sign = CheckSign(number1, number2);
+            int Status = HelperMethods.CalculateStatus(number1, number2);
+            int Sign = HelperMethods.CheckSign(number1, number2);
 
             if(operator == '+')
             {
